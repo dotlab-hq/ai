@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, cubicBezier } from "framer-motion"
 import { useRef, useEffect, useState } from "react"
 import { Activity, Command, BarChart3, Zap, Shield } from "lucide-react"
 import { m } from "@/paraglide/messages"
@@ -21,7 +21,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: cubicBezier( 0.22, 1, 0.36, 1 ),
     },
   },
 }
@@ -130,7 +130,6 @@ export function BentoGrid() {
         >
           <h2
             className="text-3xl sm:text-4xl font-bold text-white mb-4"
-            style={{ fontFamily: "var(--font-instrument-sans)" }}
           >
             {m.bento_title()}
           </h2>
@@ -148,6 +147,7 @@ export function BentoGrid() {
         >
           {/* Large card - System Status */}
           <motion.div
+            key="system-status"
             variants={itemVariants}
             className="md:col-span-2 group relative p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-600 hover:scale-[1.02] transition-all duration-300 overflow-hidden"
           >
@@ -170,7 +170,7 @@ export function BentoGrid() {
                   <div className="text-xs text-zinc-500">{metric}</div>
                 </div>
               ) )}
-              {[m.bento_metric_cpu(), m.bento_metric_memory(), m.bento_metric_network(), m.bento_metric_storage()].map( ( metric, i ) => (
+              {[m.bento_metric_cpu(), m.bento_metric_memory(), m.bento_metric_network(), m.bento_metric_storage()].map( ( metric ) => (
                 <div key={metric} className="text-center">
                   <div className="text-2xl font-bold text-white mb-1">{Math.floor( Math.random() * 40 + 60 )}%</div>
                   <div className="text-xs text-zinc-500">{metric}</div>

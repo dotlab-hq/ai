@@ -1,7 +1,7 @@
 import { m } from '@/paraglide/messages'
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, cubicBezier } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -19,7 +19,7 @@ const textRevealVariants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      ease: cubicBezier( 0.22, 1, 0.36, 1 ),
       delay: i * 0.1,
     },
   } ),
@@ -29,10 +29,10 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-zinc-950 via-zinc-950 to-zinc-900 pointer-events-none" />
 
       {/* Subtle radial glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-zinc-800/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-200 h-150 bg-zinc-800/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Badge */}
@@ -49,7 +49,6 @@ export function Hero() {
         {/* Headline with text mask animation */}
         <h1
           className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6"
-          style={{ fontFamily: "var(--font-cal-sans), sans-serif" }}
         >
           <span className="block overflow-hidden">
             <motion.span className="block" variants={textRevealVariants} initial="hidden" animate="visible" custom={0}>

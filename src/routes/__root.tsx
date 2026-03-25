@@ -16,6 +16,8 @@ import { getLocale } from '@/paraglide/runtime'
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
+import Error500 from '@/components/error-500'
+import Error404 from '@/components/error-404'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -52,6 +54,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()( {
       },
     ],
   } ),
+  errorComponent:Error500,
+  notFoundComponent:Error404,
   shellComponent: RootDocument,
 } )
 
@@ -63,10 +67,10 @@ function RootDocument( { children }: { children: React.ReactNode } ) {
         <HeadContent />
       </head>
 
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)] scrollbar-hide">
+      <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(79,184,178,0.24)] scrollbar-hide">
         <TanStackQueryProvider>
-   
-            {children}
+
+          {children}
 
           <TanStackDevtools
             config={{

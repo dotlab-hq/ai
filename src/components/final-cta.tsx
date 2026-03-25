@@ -1,7 +1,7 @@
 import { m } from '@/paraglide/messages'
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, cubicBezier } from 'framer-motion'
 import { useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -16,12 +16,11 @@ export function FinalCTA() {
         ref={ref}
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: cubicBezier( 0.22, 1, 0.36, 1 ) }}
         className="max-w-4xl mx-auto text-center"
       >
         <h2
           className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
-          style={{ fontFamily: "var(--font-cal-sans)" }}
         >
           {m.finalcta_title()}
         </h2>

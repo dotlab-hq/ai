@@ -13,6 +13,11 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LangIndexRouteImport } from './routes/$lang/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as LangAuthVerifyEmailIndexRouteImport } from './routes/$lang/auth/verify-email/index'
+import { Route as LangAuthSignupIndexRouteImport } from './routes/$lang/auth/signup/index'
+import { Route as LangAuthSigninIndexRouteImport } from './routes/$lang/auth/signin/index'
+import { Route as LangAuthResetPasswordIndexRouteImport } from './routes/$lang/auth/reset-password/index'
+import { Route as LangAuthForgotPasswordIndexRouteImport } from './routes/$lang/auth/forgot-password/index'
 
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
@@ -34,18 +39,56 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LangAuthVerifyEmailIndexRoute =
+  LangAuthVerifyEmailIndexRouteImport.update({
+    id: '/$lang/auth/verify-email/',
+    path: '/$lang/auth/verify-email/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LangAuthSignupIndexRoute = LangAuthSignupIndexRouteImport.update({
+  id: '/$lang/auth/signup/',
+  path: '/$lang/auth/signup/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangAuthSigninIndexRoute = LangAuthSigninIndexRouteImport.update({
+  id: '/$lang/auth/signin/',
+  path: '/$lang/auth/signin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangAuthResetPasswordIndexRoute =
+  LangAuthResetPasswordIndexRouteImport.update({
+    id: '/$lang/auth/reset-password/',
+    path: '/$lang/auth/reset-password/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LangAuthForgotPasswordIndexRoute =
+  LangAuthForgotPasswordIndexRouteImport.update({
+    id: '/$lang/auth/forgot-password/',
+    path: '/$lang/auth/forgot-password/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/$lang/': typeof LangIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/$lang/auth/forgot-password/': typeof LangAuthForgotPasswordIndexRoute
+  '/$lang/auth/reset-password/': typeof LangAuthResetPasswordIndexRoute
+  '/$lang/auth/signin/': typeof LangAuthSigninIndexRoute
+  '/$lang/auth/signup/': typeof LangAuthSignupIndexRoute
+  '/$lang/auth/verify-email/': typeof LangAuthVerifyEmailIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/$lang': typeof LangIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/$lang/auth/forgot-password': typeof LangAuthForgotPasswordIndexRoute
+  '/$lang/auth/reset-password': typeof LangAuthResetPasswordIndexRoute
+  '/$lang/auth/signin': typeof LangAuthSigninIndexRoute
+  '/$lang/auth/signup': typeof LangAuthSignupIndexRoute
+  '/$lang/auth/verify-email': typeof LangAuthVerifyEmailIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +96,46 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/$lang/': typeof LangIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/$lang/auth/forgot-password/': typeof LangAuthForgotPasswordIndexRoute
+  '/$lang/auth/reset-password/': typeof LangAuthResetPasswordIndexRoute
+  '/$lang/auth/signin/': typeof LangAuthSigninIndexRoute
+  '/$lang/auth/signup/': typeof LangAuthSignupIndexRoute
+  '/$lang/auth/verify-email/': typeof LangAuthVerifyEmailIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/$lang/' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/$lang/'
+    | '/api/auth/$'
+    | '/$lang/auth/forgot-password/'
+    | '/$lang/auth/reset-password/'
+    | '/$lang/auth/signin/'
+    | '/$lang/auth/signup/'
+    | '/$lang/auth/verify-email/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/$lang' | '/api/auth/$'
-  id: '__root__' | '/' | '/about' | '/$lang/' | '/api/auth/$'
+  to:
+    | '/'
+    | '/about'
+    | '/$lang'
+    | '/api/auth/$'
+    | '/$lang/auth/forgot-password'
+    | '/$lang/auth/reset-password'
+    | '/$lang/auth/signin'
+    | '/$lang/auth/signup'
+    | '/$lang/auth/verify-email'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/$lang/'
+    | '/api/auth/$'
+    | '/$lang/auth/forgot-password/'
+    | '/$lang/auth/reset-password/'
+    | '/$lang/auth/signin/'
+    | '/$lang/auth/signup/'
+    | '/$lang/auth/verify-email/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +143,11 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   LangIndexRoute: typeof LangIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  LangAuthForgotPasswordIndexRoute: typeof LangAuthForgotPasswordIndexRoute
+  LangAuthResetPasswordIndexRoute: typeof LangAuthResetPasswordIndexRoute
+  LangAuthSigninIndexRoute: typeof LangAuthSigninIndexRoute
+  LangAuthSignupIndexRoute: typeof LangAuthSignupIndexRoute
+  LangAuthVerifyEmailIndexRoute: typeof LangAuthVerifyEmailIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +180,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$lang/auth/verify-email/': {
+      id: '/$lang/auth/verify-email/'
+      path: '/$lang/auth/verify-email'
+      fullPath: '/$lang/auth/verify-email/'
+      preLoaderRoute: typeof LangAuthVerifyEmailIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/auth/signup/': {
+      id: '/$lang/auth/signup/'
+      path: '/$lang/auth/signup'
+      fullPath: '/$lang/auth/signup/'
+      preLoaderRoute: typeof LangAuthSignupIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/auth/signin/': {
+      id: '/$lang/auth/signin/'
+      path: '/$lang/auth/signin'
+      fullPath: '/$lang/auth/signin/'
+      preLoaderRoute: typeof LangAuthSigninIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/auth/reset-password/': {
+      id: '/$lang/auth/reset-password/'
+      path: '/$lang/auth/reset-password'
+      fullPath: '/$lang/auth/reset-password/'
+      preLoaderRoute: typeof LangAuthResetPasswordIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/auth/forgot-password/': {
+      id: '/$lang/auth/forgot-password/'
+      path: '/$lang/auth/forgot-password'
+      fullPath: '/$lang/auth/forgot-password/'
+      preLoaderRoute: typeof LangAuthForgotPasswordIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +223,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   LangIndexRoute: LangIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  LangAuthForgotPasswordIndexRoute: LangAuthForgotPasswordIndexRoute,
+  LangAuthResetPasswordIndexRoute: LangAuthResetPasswordIndexRoute,
+  LangAuthSigninIndexRoute: LangAuthSigninIndexRoute,
+  LangAuthSignupIndexRoute: LangAuthSignupIndexRoute,
+  LangAuthVerifyEmailIndexRoute: LangAuthVerifyEmailIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
