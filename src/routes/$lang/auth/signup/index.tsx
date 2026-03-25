@@ -116,10 +116,9 @@ function SignUpComponent() {
                     </CardHeader>
 
                     <CardContent>
-                        <motion.form
+                        <form
                             onSubmit={( e ) => form.handleSubmit( e as any )}
                             className="space-y-4"
-                            variants={containerVariants}
                         >
                             {error && (
                                 <motion.div variants={itemVariants}>
@@ -209,7 +208,7 @@ function SignUpComponent() {
                                     {isLoading ? m.auth_loading() : m.auth_sign_up()}
                                 </Button>
                             </motion.div>
-                        </motion.form>
+                        </form>
                     </CardContent>
                 </Card>
 

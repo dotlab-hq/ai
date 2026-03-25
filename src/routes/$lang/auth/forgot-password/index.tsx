@@ -83,10 +83,9 @@ function ForgotPasswordComponent() {
 
           <CardContent>
             {!success ? (
-              <motion.form
+              <form
                 onSubmit={( e ) => form.handleSubmit( e as any )}
                 className="space-y-4"
-                variants={containerVariants}
               >
                 {error && (
                   <motion.div variants={itemVariants}>
@@ -130,7 +129,7 @@ function ForgotPasswordComponent() {
                     {m.auth_back_to_signin()}
                   </Button>
                 </motion.div>
-              </motion.form>
+              </form>
             ) :
               (
                 <motion.div
