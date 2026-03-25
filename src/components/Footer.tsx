@@ -1,43 +1,81 @@
-export default function Footer() {
-  const year = new Date().getFullYear()
+"use client"
+
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+
+const footerLinks = {
+  Product: ["Features", "Pricing", "Changelog", "Roadmap", "API"],
+  Resources: ["Documentation", "Guides", "Blog", "Community", "Templates"],
+  Company: ["About", "Careers", "Press", "Partners", "Contact"],
+  Legal: ["Privacy", "Terms", "Security", "Cookies", "Licenses"],
+}
+
+export function Footer() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <footer className="mt-20 border-t border-[var(--line)] px-4 pb-14 pt-10 text-[var(--sea-ink-soft)]">
-      <div className="page-wrap flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-        <p className="m-0 text-sm">
-          &copy; {year} Your name here. All rights reserved.
-        </p>
-        <p className="island-kicker m-0">Built with TanStack Start</p>
-      </div>
-      <div className="mt-4 flex justify-center gap-4">
-        <a
-          href="https://x.com/tan_stack"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
+    <footer ref={ref} className="border-t border-zinc-800 bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-5 gap-8"
         >
-          <span className="sr-only">Follow TanStack on X</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-            <path
-              fill="currentColor"
-              d="M12.6 1h2.2L10 6.48 15.64 15h-4.41L7.78 9.82 3.23 15H1l5.14-5.84L.72 1h4.52l3.12 4.73L12.6 1zm-.77 12.67h1.22L4.57 2.26H3.26l8.57 11.41z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://github.com/TanStack"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <a href="#" className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
+                <span className="text-zinc-950 font-bold text-sm">A</span>
+              </div>
+              <span className="font-semibold text-white">Apex</span>
+            </a>
+            <p className="text-sm text-zinc-500 mb-4">The modern platform for teams who ship fast.</p>
+            {/* System Status */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 pulse-glow" />
+              <span className="text-xs text-zinc-400">All Systems Operational</span>
+            </div>
+          </div>
+
+          {/* Links */}
+          {Object.entries(footerLinks).map(([title, links]) => (
+            <div key={title}>
+              <h4 className="text-sm font-semibold text-white mb-4">{title}</h4>
+              <ul className="space-y-3">
+                {links.map((link) => (
+                  <li key={link}>
+                    <a href="#" className="text-sm text-zinc-500 hover:text-white transition-colors">
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Bottom */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-16 pt-8 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4"
         >
-          <span className="sr-only">Go to TanStack GitHub</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-            <path
-              fill="currentColor"
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            />
-          </svg>
-        </a>
+          <p className="text-sm text-zinc-500">&copy; {new Date().getFullYear()} Apex, Inc. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-sm text-zinc-500 hover:text-white transition-colors">
+              Twitter
+            </a>
+            <a href="#" className="text-sm text-zinc-500 hover:text-white transition-colors">
+              GitHub
+            </a>
+            <a href="#" className="text-sm text-zinc-500 hover:text-white transition-colors">
+              Discord
+            </a>
+          </div>
+        </motion.div>
       </div>
     </footer>
   )

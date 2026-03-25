@@ -5,8 +5,7 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+
 
 import TanStackQueryProvider from '../integrations/tanstack-query/root-provider'
 
@@ -43,7 +42,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()( {
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'AI',
       },
     ],
     links: [
@@ -63,11 +62,12 @@ function RootDocument( { children }: { children: React.ReactNode } ) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
+
+      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)] scrollbar-hide">
         <TanStackQueryProvider>
-          <Header />
-          {children}
-          <Footer />
+   
+            {children}
+
           <TanStackDevtools
             config={{
               position: 'bottom-right',
@@ -81,6 +81,7 @@ function RootDocument( { children }: { children: React.ReactNode } ) {
             ]}
           />
         </TanStackQueryProvider>
+
         <Scripts />
       </body>
     </html>

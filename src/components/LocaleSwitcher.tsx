@@ -1,44 +1,37 @@
 // Locale switcher refs:
 // - Paraglide docs: https://inlang.com/m/gerre34r/library-inlang-paraglideJs
 // - Router example: https://github.com/TanStack/router/tree/main/examples/react/i18n-paraglide#switching-locale
+
 import { getLocale, locales, setLocale } from '@/paraglide/runtime'
 import { m } from '@/paraglide/messages'
+import { Button } from './ui/button'
+import { Label } from './ui/label'
 
 export default function ParaglideLocaleSwitcher() {
-  const currentLocale = getLocale()
+  const currentLocale = getLocale();
 
   return (
     <div
-      style={{
-        display: 'flex',
-        gap: '0.5rem',
-        alignItems: 'center',
-        color: 'inherit',
-      }}
+      id="locale-switcher-root"
+      className="flex gap-2 items-center text-inherit"
       aria-label={m.language_label()}
     >
-      <span style={{ opacity: 0.85 }}>
+      <Label id="locale-switcher-label" className="opacity-85">
         {m.current_locale( { locale: currentLocale } )}
-      </span>
-      <div style={{ display: 'flex', gap: '0.25rem' }}>
+      </Label>
+      <div id="locale-switcher-buttons" className="flex gap-1">
         {locales.map( ( locale ) => (
-          <button
+          <Button
             key={locale}
-            onClick={() => setLocale( locale )}
+            id={`locale-switcher-btn-${locale}`}
+            type="button"
+            variant={locale === currentLocale ? "default" : "outline"}
             aria-pressed={locale === currentLocale}
-            style={{
-              cursor: 'pointer',
-              padding: '0.35rem 0.75rem',
-              borderRadius: '999px',
-              border: '1px solid #d1d5db',
-              background: locale === currentLocale ? '#0f172a' : 'transparent',
-              color: locale === currentLocale ? '#f8fafc' : 'inherit',
-              fontWeight: locale === currentLocale ? 700 : 500,
-              letterSpacing: '0.01em',
-            }}
+            onClick={() => setLocale( locale )}
+            className="rounded-full px-3 py-2 text-xs font-semibold"
           >
             {locale.toUpperCase()}
-          </button>
+          </Button>
         ) )}
       </div>
     </div>
