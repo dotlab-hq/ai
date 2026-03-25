@@ -1,0 +1,30 @@
+{
+  "projectName": "ai",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "pnpm",
+  "includeExamples": false,
+  "tailwind": true,
+  "addOnOptions": {
+    "drizzle": {
+      "database": "postgresql"
+    }
+  },
+  "envVarValues": {},
+  "git": false,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "compiler",
+    "drizzle",
+    "form",
+    "paraglide",
+    "shadcn",
+    "t3env",
+    "table",
+    "better-auth",
+    "tanstack-query"
+  ]
+}
